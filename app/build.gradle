@@ -1,0 +1,73 @@
+plugins {
+    id 'com.android.application'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    compileSdk 32
+
+    defaultConfig {
+        applicationId "org.chicha.quizgame"
+        minSdk 23
+        targetSdk 32
+        multiDexEnabled true
+        versionCode 3
+        versionName "1.0.3"
+
+        dataBinding {
+            enabled true
+        }
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        buildConfigField "String", "QUIZZES_KEY", "\"${properties.getProperty("QUIZZES_KEY")}\""
+        buildConfigField "String", "QUIZZES_URL", "\"${properties.getProperty("QUIZZES_URL")}\""
+        buildConfigField "String", "QUIZZES_DB_NAME", "\"${properties.getProperty("QUIZZES_DB_NAME")}\""
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    namespace 'org.chicha.quizgame'
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'com.google.android.material:material:1.7.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+
+    // added Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_vesion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_vesion"
+
+    // navigation component
+    implementation "com.etebarian:meow-bottom-navigation-java:$meow_version"
+
+    // added Room Database
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-runtime:$room_version"
+
+    // Added Lottie
+    implementation "com.airbnb.android:lottie:$lottie_version"
+
+    // Added Hilt
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    annotationProcessor "com.google.dagger:hilt-android-compiler:$hilt_version"
+    implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03'
+    annotationProcessor 'androidx.hilt:hilt-compiler:1.0.0'
+    implementation 'com.startapp:inapp-sdk:4.10.+'
+}
