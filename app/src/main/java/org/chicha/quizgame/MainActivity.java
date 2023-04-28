@@ -25,15 +25,10 @@ import org.chicha.quizgame.ui.fragments.Stats;
 import org.chicha.quizgame.utils.Menu;
 import dagger.hilt.android.AndroidEntryPoint;
 
-import com.startapp.sdk.adsbase.Ad;
-import com.startapp.sdk.adsbase.StartAppAd;
-import com.startapp.sdk.adsbase.StartAppSDK;
-import com.startapp.sdk.adsbase.VideoListener;
-import com.startapp.sdk.adsbase.adlisteners.AdEventListener;
 
 
 @AndroidEntryPoint
-public class MainActivity extends AppCompatActivity {
+public class  MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private MeowBottomNavigation navBar;
 
